@@ -1,30 +1,50 @@
 # kanban-app
+//あくまで参考書を読み、タイピングが面倒くさい所の補助レベルでお使いいただけると！
 
-> A Vue.js project
-
-## Build Setup
+## アプリケーションのビルドについて
+### 初期設定
 
 ``` bash
-# install dependencies
+npm install -g @vue/cli
+npm vue init webpack kanban-app
+
+cd kanban-app
 npm install
 
-# serve with hot reload at localhost:8080
+//npm installでおそらくエラーがでる
+//それぞれエラーが出たパッケージをインストール。npm auditするとエラーのあるパッケージのインストール方法などが表示される
+npm audit
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+### 追加機能セットアップ
+
+``` bash
+//ディレクトリ作成
+touch ./build/dev-server.js
+
+mkdir -p src/store
+touch src/store/index.js
+touch src/store/mutation-types.js
+touch src/store/mutations.js
+touch src/store/getters.js
+touch src/store/actions.js
+
+mkdir -p src/api
+touch src/api/index.js
+mkdir -p test/e2e/custom-commands
+
+touch test/e2e/custom-commands/trigger.js
+touch test/e2e/custom-commands/enterValue.js
+
+//追加機能インストール
+//参考書通り(npm install —-save-dev eslint-plugin-vue@4.7.1)だとエラーが出てしまうため、以下のコマンドに変更※あくまで私の環境
+//もしすでにインストールしていたら一度削除する必要。
+//その場合、vue uiで管理画面を起動し、GUIから削除がおすすめ
+npm install --save-dev eslint-plugin-vue
+npm install --save-dev body-parser
+npm install --save vuex es6-promise
+npm install --save axios
+npm install --save-dev @vue/test-utils@1.0.0-beta.24
+```
